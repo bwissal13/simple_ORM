@@ -1,27 +1,18 @@
-<?php
+  <?php
+class Connexion {
+    public static function getPdo() {
+        $serveurName = 'localhost';
+        $userName = 'root';
+        $Password = '';
+        $db = 'task_db';
 
-
-class Conex {
-  private $conn;
-
-    public function __construct()
-    {
         try {
-            $this->conn = new PDO("mysql:host=localhost;dbname=task_db;charset:utf8mb4", 'root', '');
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo = new PDO("mysql:host=$serveurName;dbname=$db;charset=utf8mb4", $userName, $Password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $pdo;
         } catch (PDOException $e) {
-            die("Connection failed:" . $e->getMessage());
+            die("Échec de la connexion : " . $e->getMessage());
         }
-
-        return $this->conn;
-    } 
-
-    public function getConnection() {
-        return $this->conn;
     }
-
-    public function __destruct() {
-        $this->conn = null;
-    }
-    
 }
+ ?> 

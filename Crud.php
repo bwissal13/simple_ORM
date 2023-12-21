@@ -1,17 +1,13 @@
 <?php
-
+require "./database/conex.php";
 
 
 class Crud
 {
-    
 
-   private $conex;
-
-
-    public function __construct(){
-        $conex = new Conex(); 
-        $this->conex ->getConnection();
+    private $conex;
+    public function __construct() {
+        $this->conex = Connexion::getPdo();
     }
     
 
@@ -31,6 +27,7 @@ class Crud
         $stmt->execute(array_values($data));
 
         return $stmt->rowCount();
+       
     }
 
     public function updateRecord($table, $data, $id)
@@ -96,11 +93,3 @@ class Crud
         $this->conex = null;
     }
 }
-// $test= new Crud();
-// $test->insertRecord("users",['First_name'=> "ana",'Last_name'=>"taniana",'Email'=>"chihaja","Phone"=>15]);
-// $test1 = new Crud() ;
-// $test1->updateRecord("users",['First_name'=> "anaaatest",'Last_name'=>"tanianatest",'Email'=>"chihajatest","Phone"=>15],1);
-// $test3 = new Crud();
-// $test3-> deleteRecord("users",1);
-// $test3 = new Crud();
-// $test3-> selectRecords("users","First_name= 'ana'");
